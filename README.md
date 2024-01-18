@@ -13,12 +13,7 @@ this [MLOps course](https://github.com/SkafteNicki/dtu_mlops).
 
 ## Start a new project
 
-Start by creating a repository either using the Github GUI in the webbrowser or alternatively you can use the
-[Github command line interface](https://cli.github.com/) if you have set it up:
-
-```bash
-gh repo create <repo_name> --public --confirm
-```
+Start by creating a repository either using the Github GUI.
 Afterwards on your local machine run
 
 ```bash
@@ -39,8 +34,22 @@ git init
 git add .
 git commit -m "init cookiecutter project"
 git remote add origin https://github.com/<username>/<repo_name>
-git push origin master
+git push origin main
 ```
+
+## GitHub branch protection
+
+It is recommended to protect the `main` branch of the repository.
+To do this go to the repository settings, go to "Branches" and click "Add branch protection rule".
+Type `main` as the branch name pattern and check the following boxes:
+ - "Require a pull request before merging" to force changes to the `main` branch to go through PRs.
+   - "Require approvals" this is optional, but can help to ensure that multiple people understand all code. It can also make progress more sluggish.
+   - "Dismiss stale pull request approvals when new commits are pushed" if the above is checked, this should also be checked.
+   - "Require approval of the most recent reviewable push" to avoid contributors approving their own PRs.
+ - "Require status checks to pass before merging" force PR to pass CI before merging.
+   - "Require branches to be up to date before merging".
+   - Add any status checks you want. With this template we recommend adding `static_checks` as it runs Ruff and avoids non-unix line endings.
+ - "Do not allow bypassing the above settings" force admins (like yourself) to also follow the rules.
 
 ## The stack
 
